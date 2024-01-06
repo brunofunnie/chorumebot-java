@@ -1,4 +1,4 @@
-package tech.chorume.bot.containers.scanner;
+package scanner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,14 +21,14 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class ComponentScannerTest {
+public class TestComponentLoader {
 
     @Test
     @DisplayName("Should find annotated classes in running context")
     public void scanTestAnnotation() {
         try (MockedStatic<ClassScanner> mockedFactory = Mockito.mockStatic(ClassScanner.class)) {
             // static mock main class because we are in testing context
-            mockedFactory.when(ClassScanner::getMainClass).thenReturn(ComponentScannerTest.class);
+            mockedFactory.when(ClassScanner::getMainClass).thenReturn(TestComponentLoader.class);
             mockedFactory.when(ClassScanner::getClassScanners).thenReturn(Arrays.asList(new JarClassScanner(), new LocalPathClassScanner()));
 
             AnnotationFilter annotationFilter = new AnnotationFilter(CommandBuilder.class);
@@ -45,7 +45,7 @@ public class ComponentScannerTest {
     public void scanTestInterface() {
         try (MockedStatic<ClassScanner> mockedFactory = Mockito.mockStatic(ClassScanner.class)) {
             // static mock main class because we are in testing context
-            mockedFactory.when(ClassScanner::getMainClass).thenReturn(ComponentScannerTest.class);
+            mockedFactory.when(ClassScanner::getMainClass).thenReturn(TestComponentLoader.class);
             mockedFactory.when(ClassScanner::getClassScanners).thenReturn(Arrays.asList(new JarClassScanner(), new LocalPathClassScanner()));
 
             InterfaceFilter interfaceFilter = new InterfaceFilter(SlashCommandBuilder.class);
@@ -62,7 +62,7 @@ public class ComponentScannerTest {
     public void scanTestBotCommand() {
         try (MockedStatic<ClassScanner> mockedFactory = Mockito.mockStatic(ClassScanner.class)) {
             // static mock main class because we are in testing context
-            mockedFactory.when(ClassScanner::getMainClass).thenReturn(ComponentScannerTest.class);
+            mockedFactory.when(ClassScanner::getMainClass).thenReturn(TestComponentLoader.class);
             mockedFactory.when(ClassScanner::getClassScanners).thenReturn(Arrays.asList(new JarClassScanner(), new LocalPathClassScanner()));
 
             var filters = List.of(
@@ -83,7 +83,7 @@ public class ComponentScannerTest {
     public void scanTestNoResults() {
         try (MockedStatic<ClassScanner> mockedFactory = Mockito.mockStatic(ClassScanner.class)) {
             // static mock main class because we are in testing context
-            mockedFactory.when(ClassScanner::getMainClass).thenReturn(ComponentScannerTest.class);
+            mockedFactory.when(ClassScanner::getMainClass).thenReturn(TestComponentLoader.class);
             mockedFactory.when(ClassScanner::getClassScanners).thenReturn(Arrays.asList(new JarClassScanner(), new LocalPathClassScanner()));
 
             InterfaceFilter filter1 = new InterfaceFilter(SlashCommandHandler.class);
