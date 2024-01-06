@@ -1,10 +1,10 @@
-package tech.chorume.bot.core.containers.scanner.filters;
+package tech.chorume.bot.core.containers.loader.strategies;
 
 import tech.chorume.bot.core.interfaces.ComponentFilter;
 
-public class InterfaceImplFilter implements ComponentFilter {
+public class InterfaceFilter implements ComponentFilter {
     Class<?> implementedInterface;
-    public InterfaceImplFilter(Class<?> implementedInterface) {
+    public InterfaceFilter(Class<?> implementedInterface) {
         this.implementedInterface = implementedInterface;
     }
     public boolean match(Class<?> clazz) {

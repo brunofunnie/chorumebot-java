@@ -1,4 +1,4 @@
-package tech.chorume.bot.core.containers.scanner.filters;
+package tech.chorume.bot.core.containers.loader.strategies;
 
 import tech.chorume.bot.core.interfaces.ComponentFilter;
 

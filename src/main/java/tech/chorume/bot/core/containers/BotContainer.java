@@ -1,12 +1,15 @@
 package tech.chorume.bot.core.containers;
 
-import tech.chorume.bot.core.containers.scanner.ComponentScanner;
-import tech.chorume.bot.core.containers.scanner.filters.BotSlashCommandBuilderFilter;
-import tech.chorume.bot.core.containers.scanner.filters.InterfaceImplFilter;
+import tech.chorume.bot.core.annotations.CommandBuilder;
+import tech.chorume.bot.core.containers.loader.ComponentLoader;
+import tech.chorume.bot.core.containers.loader.strategies.AnnotationFilter;
+import tech.chorume.bot.core.containers.loader.strategies.CompositeFilter;
+import tech.chorume.bot.core.containers.loader.strategies.InterfaceFilter;
 import tech.chorume.bot.core.interfaces.DiscordBotConfiguration;
 import tech.chorume.bot.core.interfaces.SlashCommandBuilder;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +18,7 @@ import java.util.stream.Collectors;
 public class BotContainer {
     Logger logger = Logger.getLogger(BotContainer.class.getName());
     public DiscordBotConfiguration loadBotConfiguration() {
-        var scanner = new ComponentScanner(new InterfaceImplFilter(DiscordBotConfiguration.class));
+        var scanner = new ComponentLoader(new InterfaceFilter(DiscordBotConfiguration.class));
         try {
             var discordBotConfigClass = scanner.scan();
             return (DiscordBotConfiguration) discordBotConfigClass
@@ -31,7 +34,14 @@ public class BotContainer {
     }
 
     public Collection<SlashCommandBuilder> loadSlahCommandBuilders() {
-        var scanner = new ComponentScanner(new BotSlashCommandBuilderFilter());
+
+        var filters = List.of(
+                new AnnotationFilter(CommandBuilder.class),
+                new InterfaceFilter(SlashCommandBuilder.class)
+        );
+
+        var scanner = new ComponentLoader(new CompositeFilter(filters));
+
         try {
             var commandBuilderList = scanner.scan();
             return commandBuilderList
