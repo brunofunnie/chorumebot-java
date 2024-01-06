@@ -1,10 +1,12 @@
-package tech.chorume.bot.containers.scanner.test;
+package scanner.test;
 
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
+import tech.chorume.bot.core.annotations.CommandBuilder;
 import tech.chorume.bot.core.interfaces.SlashCommandBuilder;
 import tech.chorume.bot.core.interfaces.SlashCommandHandler;
 
-public class SlashCommandBuilder2NoAnnotation implements SlashCommandBuilder {
+@CommandBuilder
+public class SlashCommandBuilder1 implements SlashCommandBuilder {
 
     @Override
     public SlashCommandData buildCommand() {
