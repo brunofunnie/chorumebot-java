@@ -1,5 +1,6 @@
 services:
   jda:
+    image: chorume-bot-java
     build:
       context: .
       dockerfile: Dockerfile
