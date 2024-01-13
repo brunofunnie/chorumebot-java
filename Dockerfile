@@ -2,7 +2,7 @@
 FROM maven:3.9.6 as build
 WORKDIR /app
 COPY . /app
-RUN mvn clean compile assembly:single
+RUN mvn clean package assembly:single
 
 # Stage 2: Run Stage
 # OpenJDK docker images are deprecated.
