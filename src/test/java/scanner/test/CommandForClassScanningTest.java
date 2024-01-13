@@ -7,7 +7,7 @@ import tech.chorume.bot.core.interfaces.SlashCommandBuilder;
 import tech.chorume.bot.core.interfaces.SlashCommandHandler;
 
 @CommandBuilder
-public class CommandForTestClassScanning implements SlashCommandBuilder {
+public class CommandForClassScanningTest implements SlashCommandBuilder {
 
     @Override
     public SlashCommandData buildCommand() {

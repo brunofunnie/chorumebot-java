@@ -4,9 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-import scanner.test.CommandForTestClassScanning;
-import scanner.test.CommandNoAnnotationForTestClassScanning;
-import scanner.test.CommandNoInterfaceForTestClassScanning;
+import scanner.test.CommandForClassScanningTest;
+import scanner.test.CommandNoAnnotationForClassScanningTest;
+import scanner.test.CommandNoInterfaceForClassScanningTest;
 import tech.chorume.bot.core.annotations.CommandBuilder;
 import tech.chorume.bot.core.containers.scanner.ClassScanner;
 import tech.chorume.bot.core.containers.loader.ComponentLoader;
@@ -38,8 +38,8 @@ public class TestComponentLoader {
             ComponentLoader scanner = new ComponentLoader(annotationFilter);
             Collection<Class<?>> classes = scanner.scan();
             Assertions.assertEquals(2, classes.size(), "Should find 2 classes annotated with CommandBuilder.class");
-            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains(CommandForTestClassScanning.class.getSimpleName())).count(), "Should find " + CommandForTestClassScanning.class.getSimpleName() + " as annotated class");
-            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains(CommandNoInterfaceForTestClassScanning.class.getSimpleName())).count(), "Should find " + CommandNoInterfaceForTestClassScanning.class.getSimpleName() + " as annotated class");
+            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains(CommandForClassScanningTest.class.getSimpleName())).count(), "Should find " + CommandForClassScanningTest.class.getSimpleName() + " as annotated class");
+            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains(CommandNoInterfaceForClassScanningTest.class.getSimpleName())).count(), "Should find " + CommandNoInterfaceForClassScanningTest.class.getSimpleName() + " as annotated class");
         }
     }
 
@@ -55,8 +55,8 @@ public class TestComponentLoader {
             ComponentLoader scanner = new ComponentLoader(interfaceFilter);
             Collection<Class<?>> classes = scanner.scan();
             Assertions.assertEquals(2, classes.size(), "Should find 2 classes implementing " + SlashCommandBuilder.class.getSimpleName() +" interface");
-            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains(CommandForTestClassScanning.class.getSimpleName())).count(), "Should find " + CommandForTestClassScanning.class.getSimpleName() + " as an implementing class");
-            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains(CommandNoAnnotationForTestClassScanning.class.getSimpleName())).count(), "Should find " +  CommandNoAnnotationForTestClassScanning.class.getSimpleName() + " as an implementing class");
+            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains(CommandForClassScanningTest.class.getSimpleName())).count(), "Should find " + CommandForClassScanningTest.class.getSimpleName() + " as an implementing class");
+            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains(CommandNoAnnotationForClassScanningTest.class.getSimpleName())).count(), "Should find " +  CommandNoAnnotationForClassScanningTest.class.getSimpleName() + " as an implementing class");
         }
     }
 
@@ -77,7 +77,7 @@ public class TestComponentLoader {
             ComponentLoader scanner = new ComponentLoader(botCommandFilter);
             Collection<Class<?>> classes = scanner.scan();
             Assertions.assertEquals(1, classes.size(), "Should find 1 bot command builder class in running context");
-            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains(CommandForTestClassScanning.class.getSimpleName())).count(), "Should find " + CommandForTestClassScanning.class.getSimpleName() + " as a command builder in running context");
+            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains(CommandForClassScanningTest.class.getSimpleName())).count(), "Should find " + CommandForClassScanningTest.class.getSimpleName() + " as a command builder in running context");
         }
     }
 
