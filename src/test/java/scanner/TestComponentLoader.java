@@ -4,6 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
+import scanner.test.CommandForTestClassScanning;
+import scanner.test.CommandNoAnnotationForTestClassScanning;
+import scanner.test.CommandNoInterfaceForTestClassScanning;
 import tech.chorume.bot.core.annotations.CommandBuilder;
 import tech.chorume.bot.core.containers.scanner.ClassScanner;
 import tech.chorume.bot.core.containers.loader.ComponentLoader;
@@ -35,8 +38,8 @@ public class TestComponentLoader {
             ComponentLoader scanner = new ComponentLoader(annotationFilter);
             Collection<Class<?>> classes = scanner.scan();
             Assertions.assertEquals(2, classes.size(), "Should find 2 classes annotated with CommandBuilder.class");
-            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains("SlashCommandBuilder1")).count(), "Should find SlashCommandBuilder1 as annotated class");
-            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains("SlashCommandBuilder3NoInterface")).count(), "Should find SlashCommandBuilder3NoInterface as annotated class");
+            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains(CommandForTestClassScanning.class.getSimpleName())).count(), "Should find " + CommandForTestClassScanning.class.getSimpleName() + " as annotated class");
+            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains(CommandNoInterfaceForTestClassScanning.class.getSimpleName())).count(), "Should find " + CommandNoInterfaceForTestClassScanning.class.getSimpleName() + " as annotated class");
         }
     }
 
@@ -51,9 +54,9 @@ public class TestComponentLoader {
             InterfaceFilter interfaceFilter = new InterfaceFilter(SlashCommandBuilder.class);
             ComponentLoader scanner = new ComponentLoader(interfaceFilter);
             Collection<Class<?>> classes = scanner.scan();
-            Assertions.assertEquals(2, classes.size(), "Should find 2 classes implementing SlashCommandBuilder.class interface");
-            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains("SlashCommandBuilder1")).count(), "Should find SlashCommandBuilder1 as an implementing class");
-            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains("SlashCommandBuilder2NoAnnotation")).count(), "Should find SlashCommandBuilder2NoAnnotation as an implementing class");
+            Assertions.assertEquals(2, classes.size(), "Should find 2 classes implementing " + SlashCommandBuilder.class.getSimpleName() +" interface");
+            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains(CommandForTestClassScanning.class.getSimpleName())).count(), "Should find " + CommandForTestClassScanning.class.getSimpleName() + " as an implementing class");
+            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains(CommandNoAnnotationForTestClassScanning.class.getSimpleName())).count(), "Should find " +  CommandNoAnnotationForTestClassScanning.class.getSimpleName() + " as an implementing class");
         }
     }
 
@@ -74,7 +77,7 @@ public class TestComponentLoader {
             ComponentLoader scanner = new ComponentLoader(botCommandFilter);
             Collection<Class<?>> classes = scanner.scan();
             Assertions.assertEquals(1, classes.size(), "Should find 1 bot command builder class in running context");
-            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains("SlashCommandBuilder1")).count(), "Should find SlashCommandBuilder1 as a command builder in running context");
+            Assertions.assertEquals(1, classes.stream().filter(clazz -> clazz.getName().contains(CommandForTestClassScanning.class.getSimpleName())).count(), "Should find " + CommandForTestClassScanning.class.getSimpleName() + " as a command builder in running context");
         }
     }
 
@@ -92,8 +95,8 @@ public class TestComponentLoader {
             AnnotationFilter filter2 = new AnnotationFilter(Annotation.class);
             ComponentLoader scanner2 = new ComponentLoader(filter2);
 
-            Assertions.assertEquals(0, scanner1.scan().size(), "Should not find any class implementing SlashCommandHandler.class interface in running context");
-            Assertions.assertEquals(0, scanner2.scan().size(), "Should not find any class annotated with SlashCommandHandler.class in running context");
+            Assertions.assertEquals(0, scanner1.scan().size(), "Should not find any class implementing " + SlashCommandHandler.class.getSimpleName() + " interface in running context");
+            Assertions.assertEquals(0, scanner2.scan().size(), "Should not find any class annotated with " + Annotation.class.getSimpleName() + " in running context");
         }
     }
 
