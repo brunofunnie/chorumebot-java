@@ -2,7 +2,6 @@ package tech.chorume.bot.core;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.hooks.EventListener;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import tech.chorume.bot.core.interfaces.DiscordBotConfiguration;
 import tech.chorume.bot.core.interfaces.SlashCommandHandler;
