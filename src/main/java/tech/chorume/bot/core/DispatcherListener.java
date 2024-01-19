@@ -1,13 +1,12 @@
 package tech.chorume.bot.core;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.hooks.EventListener;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import tech.chorume.bot.core.interfaces.SlashCommandHandler;
 
 import java.util.Map;
 
-public class DispatcherListener extends ListenerAdapter implements EventListener {
+public class DispatcherListener extends ListenerAdapter {
     private Map<String, SlashCommandHandler> handlers;
     public DispatcherListener(Map<String, SlashCommandHandler> handlers) {
         this.handlers = handlers;
