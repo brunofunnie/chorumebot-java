@@ -49,17 +49,4 @@ public class UsersRepositoryImpl implements UsersRepository{
         transaction.commit();
         return user;
     }
-
-    @Override
-    public Users updateTotalCoins(long userId, int totalCoinsToAdd) {
-        Users user = findById(userId);
-        if (user != null) {
-            user.setTotalCoins(user.getTotalCoins() + totalCoinsToAdd);
-            EntityTransaction transaction = entityManager.getTransaction();
-            transaction.begin();
-            entityManager.merge(user);
-            transaction.commit();
-        }
-        return user;
-    }
 }

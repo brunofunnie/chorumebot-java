@@ -8,5 +8,4 @@ public interface UsersRepository {
     Users findByDiscordUserId(String discordUserName, String discordUserId);
     List<Users> findAll();
     Users save(Users user);
-    Users updateTotalCoins(long userId, int totalCoinsToAdd);    
 }
