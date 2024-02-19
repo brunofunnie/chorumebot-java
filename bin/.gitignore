@@ -48,6 +48,3 @@ build/
 
 # VS Code #
 .vscode/
-/data/postgres
-
-/data/pgadmin

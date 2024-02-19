@@ -1,4 +1,25 @@
 services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres2
+    ports:
+      - "5432:5432"
+    environment:
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=123456"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadminFernando2
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - 9191:80
+    volumes:
+        - "./data/pgadmin/root:/root/.pgadmin"
+        - "./data/pgadmin/lib:/var/lib/pgadmin"
   jda:
     image: chorume-bot-java
     build:
